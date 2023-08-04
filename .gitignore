@@ -10,11 +10,6 @@ __pycache__/
 *.log
 
 
-# Jupyter Notebook temp files
-.ipynb_checkpoints/
-*.ipynb_checkpoints/
-
-
 # Data and large files (customize as needed)
 #data/
 *.csv
@@ -32,14 +27,11 @@ venv*/
 
 
 # macOS Finder files
-.DS_Store
+*.DS_Store
 
 
 # IDE settings (customize as needed, this is for VSCode)
 .vscode/
-
-
-Try Pandas-AI.ipynb
 
 
 
