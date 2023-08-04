@@ -1,0 +1,45 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+
+# Project-specific files
+*.ipynb
+*.ipynb_checkpoints
+*.log
+
+
+# Jupyter Notebook temp files
+.ipynb_checkpoints/
+*.ipynb_checkpoints/
+
+
+# Data and large files (customize as needed)
+#data/
+*.csv
+*.xlsx
+*.json
+
+
+# secrets
+.secrets
+.streamlit/.secrets
+
+
+# Virtual environment (if you use virtualenv or venv)
+venv*/
+
+
+# macOS Finder files
+.DS_Store
+
+
+# IDE settings (customize as needed, this is for VSCode)
+.vscode/
+
+
+Try Pandas-AI.ipynb
+
+
+
