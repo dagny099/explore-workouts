@@ -19,7 +19,7 @@ __pycache__/
 
 # secrets
 .secrets
-.streamlit/.secrets
+.streamlit/secrets.toml
 
 
 # Virtual environment (if you use virtualenv or venv)
