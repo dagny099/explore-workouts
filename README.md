@@ -1,4 +1,4 @@
-# run-explorer
+# Workout Explorer
 
 Build a Streamlit app for exploring my MapMyRun data
 
