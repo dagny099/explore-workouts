@@ -1,6 +1,7 @@
 pandasai==0.8.1
-streamlit
-
+streamlit==1.23.1
+seaborn==0.12.2 
+pandas==1.5.3
 
 #python-dotenv==1.0.0
 #streamlit-pandas-profiling==0.1.3

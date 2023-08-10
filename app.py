@@ -4,6 +4,12 @@ from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
 import matplotlib.pyplot as plt
 
+st.set_page_config(
+    page_title="Hello",
+    page_icon="👋",
+)
+
+
 st.markdown('''
 # **Converse with Data**  
 
@@ -12,18 +18,32 @@ st.markdown('''
 ''')            
 
 st.session_state.openai_key = st.secrets["openai_key"]
-st.session_state.prompt_history = []
 if "df" not in st.session_state:
+    st.session_state.prompt_history = []
     st.session_state.df = None
 
 if "openai_key" in st.session_state:
-    if st.button('Press to use Example Dataset'):
-        df = pd.read_csv('data/iris.csv')
+    if st.sidebar.button('Press to load an example dataset'):
+        df = pd.read_csv('data/uci-cc-power-plant-data.csv')
         st.session_state.df = df
+        st.sidebar.markdown('''
+        The dataset contains 9568 data points collected from a Combined Cycle Power Plant over 6 years (2006-2011), 
+        when the power plant was set to work with full load. \n
+        Features consist of the following *hourly average ambient variables* to 
+        predict the **net hourly electrical energy output (PE)** of the plant.
+        - Temperature (T),  
+        - Ambient Pressure (AP),  
+        - Relative Humidity (RH)  and 
+        - Exhaust Vacuum (V) to 
+        
 
-    uploaded_file = st.file_uploader(
-        "Choose a CSV file. This should be in long format (one datapoint per row).",
+        [Visit UCI page](https://archive.ics.uci.edu/dataset/294/combined+cycle+power+plant)
+                    
+        ''')
+    st.sidebar.subheader('OR')
+    uploaded_file = st.sidebar.file_uploader("",
         type="csv",
+        help="Data should be in long format, one datapoint per row.",
     )
     if uploaded_file is not None:
         df = pd.read_csv(uploaded_file)
@@ -33,16 +53,22 @@ if "openai_key" in st.session_state:
         with st.form("Question"):
             question = st.text_input("Question", value="", type="default")
             submitted = st.form_submit_button("Submit")
+            st.markdown('''Examples of questions include:  
+                        * Does the data have any missing values?  
+                        * What is the average and standard deviation of each variable? Display the output in a dataframe.
+                        * and make the text red for the largest value per column
+                        ''')
             if submitted:
                 with st.spinner():
                     llm = OpenAI(api_token=st.session_state.openai_key)
-                    pandas_ai = PandasAI(llm)
+                    pandas_ai = PandasAI(llm) #, verbose=True, conversational=False, enforce_privacy=False, enable_cache=True)
                     x = pandas_ai.run(st.session_state.df, prompt=question)
 
-                    fig = plt.gcf()
-                    if fig.get_axes():
-                        st.pyplot(fig)
-                        #st.write(fig)
+                    #fig = plt.gcf()
+                    fig, ax = plt.subplots()
+                    #ax.hist(arr, bins=20)
+                    # if fig.get_axes():
+                    st.pyplot(fig)
                     st.write(x)
                     st.session_state.prompt_history.append(question)
 
@@ -57,3 +83,5 @@ if "openai_key" in st.session_state:
 if st.button("Clear"):
     st.session_state.prompt_history = []
     st.session_state.df = None
+
+# SAMPLE QUESTION: List the average values for each variety and make the text red for the largest value per column
