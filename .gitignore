@@ -25,7 +25,8 @@ cache/
 
 # Virtual environment (if you use virtualenv or venv)
 venv*/
-
+.env*
+.venv*
 
 # macOS Finder files
 *.DS_Store
