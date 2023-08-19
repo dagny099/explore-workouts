@@ -2,18 +2,20 @@ import streamlit as st
 import pandas as pd
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
+import matplotlib
+matplotlib.use('agg')
 import matplotlib.pyplot as plt
 
 st.set_page_config(
-    page_title="Hello",
-    page_icon="👋",
+    page_title="Converse with Data",
+    page_icon="🦉",
 )
 
 
 st.markdown('''
 # **Converse with Data**  
 
-#### This is an **EDA App** created in Streamlit using the  [PandasAI](https://github.com/gventuri/pandas-ai) library.
+#### This is an **EDA App** created in Streamlit using the [PandasAI](https://github.com/gventuri/pandas-ai) library.
 ---
 ''')            
 
@@ -64,11 +66,11 @@ if "openai_key" in st.session_state:
                     pandas_ai = PandasAI(llm) #, verbose=True, conversational=False, enforce_privacy=False, enable_cache=True)
                     x = pandas_ai.run(st.session_state.df, prompt=question)
 
-                    #fig = plt.gcf()
-                    fig, ax = plt.subplots()
+                    fig = plt.gcf()
+                    #fig, ax = plt.subplots()
                     #ax.hist(arr, bins=20)
-                    # if fig.get_axes():
-                    st.pyplot(fig)
+                    if fig.get_axes():
+                        st.pyplot(fig)
                     st.write(x)
                     st.session_state.prompt_history.append(question)
 
