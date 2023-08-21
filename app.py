@@ -1,4 +1,6 @@
 import streamlit as st
+from st_files_connection import FilesConnection
+
 import pandas as pd
 from pandasai import PandasAI
 from pandasai.llm.openai import OpenAI
@@ -11,6 +13,7 @@ st.set_page_config(
     page_icon="🦉",
 )
 
+conn = st.experimental_connection('s3', type=FilesConnection)
 
 st.markdown('''
 # **Converse with Data**  
@@ -26,7 +29,10 @@ if "df" not in st.session_state:
 
 if "openai_key" in st.session_state:
     if st.sidebar.button('Press to load an example dataset'):
-        df = pd.read_csv('data/uci-cc-power-plant-data.csv')
+        
+        #df = pd.read_csv('data/uci-cc-power-plant-data.csv')
+        df = conn.read("run-explorer-files/uci-cc-power-plant-data.csv", input_format="csv", ttl=600)
+
         st.session_state.df = df
         st.sidebar.markdown('''
         The dataset contains 9568 data points collected from a Combined Cycle Power Plant over 6 years (2006-2011), 
