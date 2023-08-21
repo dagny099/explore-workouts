@@ -35,5 +35,5 @@ venv*/
 # IDE settings (customize as needed, this is for VSCode)
 .vscode/
 
-
-
+# other stuff
+old/*
