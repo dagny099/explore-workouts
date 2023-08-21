@@ -3,6 +3,4 @@ streamlit==1.23.1
 seaborn==0.12.2 
 pandas==1.5.3
 s3fs==2023.6.0
-
-# Direct pypi install coming soon
 git+https://github.com/streamlit/files-connection
